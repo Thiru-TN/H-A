@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Solrrbox - Solar Made Simple</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #38b6ff;
+        --primary-dark: #0096e0;
+        --primary-light: #74d0ff;
+        --secondary: #f8f9fa;
+        --accent: #ff7e30;
+        --text-dark: #2d3748;
+        --text-light: #718096;
+        --gray-light: #e2e8f0;
+        --white: #ffffff;
+        --success: #48bb78;
+        --error: #e53e3e;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        --transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        color: var(--text-dark);
+        line-height: 1.6;
+        background-color: var(--secondary);
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 15px 0;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        transition: var(--transition);
+      }
+
+      .logo:hover {
+        transform: translateY(-2px);
+      }
+
+      .logo img {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .logo h1 {
+        color: var(--primary);
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .logo span {
+        color: var(--text-dark);
+        font-weight: 300;
+      }
+
+      /* Auth Container */
+      .auth-container {
+        display: flex;
+        min-height: calc(100vh - 80px);
+        align-items: center;
+        justify-content: center;
+        padding: 40px 0;
+      }
+
+      .auth-wrapper {
+        display: flex;
+        width: 100%;
+        max-width: 1000px;
+        background: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+      }
+
+      .auth-left {
+        flex: 1;
+        background: linear-gradient(
+          120deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: var(--white);
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .auth-left::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+        background-size: 100% 100%;
+        animation: solarMove 20s linear infinite;
+      }
+
+      @keyframes solarMove {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .auth-left-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .auth-left h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .auth-left p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+      }
+
+      .auth-features {
+        list-style: none;
+        margin-top: 30px;
+      }
+
+      .auth-features li {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .auth-features i {
+        margin-right: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .auth-right {
+        flex: 1;
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .auth-form-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .auth-tabs {
+        display: flex;
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--gray-light);
+      }
+
+      .auth-tab {
+        padding: 12px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-light);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .auth-tab.active {
+        color: var(--primary);
+      }
+
+      .auth-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+      }
+
+      .auth-form {
+        display: none;
+      }
+
+      .auth-form.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .form-title {
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--primary);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 14px 20px;
+        border: 2px solid var(--gray-light);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.2);
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 45px;
+        color: var(--text-light);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .password-toggle:hover {
+        color: var(--primary);
+      }
+
+      .user-type-selector {
+        display: flex;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid var(--gray-light);
+      }
+
+      .user-type {
+        flex: 1;
+        text-align: center;
+        padding: 12px;
+        cursor: pointer;
+        transition: var(--transition);
+        background: var(--white);
+      }
+
+      .user-type.active {
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      .btn {
+        display: block;
+        width: 100%;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: var(--transition);
+        font-size: 16px;
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(56, 182, 255, 0.3);
+      }
+
+      .btn-google {
+        background-color: var(--white);
+        color: var(--text-dark);
+        border: 2px solid var(--gray-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn-google:hover {
+        background-color: var(--gray-light);
+      }
+
+      .btn-google i {
+        margin-right: 10px;
+        color: var(--error);
+      }
+
+      .divider {
+        text-align: center;
+        margin: 25px 0;
+        position: relative;
+      }
+
+      .divider::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--gray-light);
+      }
+
+      .divider span {
+        background: var(--white);
+        padding: 0 15px;
+        position: relative;
+        color: var(--text-light);
+      }
+
+      .form-footer {
+        text-align: center;
+        margin-top: 30px;
+        color: var(--text-light);
+      }
+
+      .form-footer a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .form-footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* OTP Verification */
+      .otp-verification {
+        display: none;
+        text-align: center;
+      }
+
+      .otp-verification.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .otp-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .otp-input {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        border: 2px solid var(--gray-light);
+        border-radius: 8px;
+        transition: var(--transition);
+      }
+
+      .otp-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.2);
+      }
+
+      .timer {
+        font-size: 18px;
+        margin: 20px 0;
+        color: var(--text-dark);
+      }
+
+      .timer span {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .resend-btn {
+        background: none;
+        border: none;
+        color: var(--primary);
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: underline;
+        transition: var(--transition);
+        display: none;
+      }
+
+      .resend-btn.active {
+        display: inline-block;
+      }
+
+      .resend-btn:hover {
+        color: var(--primary-dark);
+      }
+
+      .social-icons {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        margin-right: 10px;
+        transition: var(--transition);
+      }
+
+      .social-icons a:hover {
+        background-color: var(--primary);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--gray-light);
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 900px) {
+        .auth-wrapper {
+          flex-direction: column;
+          max-width: 500px;
+        }
+
+        .auth-left,
+        .auth-right {
+          padding: 40px 30px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .auth-left,
+        .auth-right {
+          padding: 30px 20px;
+        }
+
+        .auth-tabs {
+          flex-direction: column;
+        }
+
+        .otp-container {
+          gap: 10px;
+        }
+
+        .otp-input {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <a href="./landing.html" class="logo">
+            <!-- Using the logo image from the same directory -->
+            <img src="images/Solrrbox.jpg" alt="Solrrbox Logo" />
+            <h1>Solrr<span>box</span></h1>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Auth Container -->
+    <section class="auth-container">
+      <div class="auth-wrapper">
+        <div class="auth-left">
+          <div class="auth-left-content">
+            <h2>Welcome to Solrrbox</h2>
+            <p>
+              Join our solar community and take the first step toward a
+              sustainable, solar-powered future.
+            </p>
+
+            <ul class="auth-features">
+              <li>
+                <i class="fas fa-check-circle"></i> Access to trusted solar
+                products
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Connect with service
+                providers
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Compare prices and services
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> Manage your solar needs in
+                one place
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="auth-right">
+          <div class="auth-form-container">
+            <div class="auth-tabs">
+              <div class="auth-tab active" data-tab="login">Login</div>
+              <div class="auth-tab" data-tab="register">Register</div>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form active" id="loginForm">
+              <h2 class="form-title">Login to Your Account</h2>
+              <div class="user-type-selector" id="loginUserType">
+                <div class="user-type active" data-type="customer">
+                  Customer
+                </div>
+                <div class="user-type" data-type="shopkeeper">Shopkeeper</div>
+              </div>
+              <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input
+                  type="email"
+                  id="loginEmail"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input
+                  type="password"
+                  id="loginPassword"
+                  placeholder="Enter your password"
+                  required
+                />
+                <i
+                  class="fas fa-eye password-toggle"
+                  id="loginPasswordToggle"
+                ></i>
+              </div>
+
+              <button type="submit" class="btn">Login</button>
+
+              <div class="divider"><span>Or continue with</span></div>
+
+              <button type="button" class="btn btn-google">
+                <i class="fab fa-google"></i> Google
+              </button>
+
+              <div class="form-footer">
+                <p>
+                  Don't have an account?
+                  <a href="#" id="goToRegister">Register now</a>
+                </p>
+                <p><a href="#">Forgot your password?</a></p>
+              </div>
+            </form>
+
+            <!-- Registration Form -->
+            <form class="auth-form" id="registerForm">
+              <h2 class="form-title">Create an Account</h2>
+
+              <div class="user-type-selector">
+                <div class="user-type active" data-type="customer">
+                  Customer
+                </div>
+                <div class="user-type" data-type="shopkeeper">Shopkeeper</div>
+              </div>
+
+              <div class="form-group">
+                <label for="registerName">Full Name</label>
+                <input
+                  type="text"
+                  id="registerName"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input
+                  type="email"
+                  id="registerEmail"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="registerPhone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="registerPhone"
+                  placeholder="Enter your phone number"
+                  required
+                />
+              </div>
+
+              <!-- Shopkeeper-specific fields -->
+              <div class="shopkeeper-fields" style="display: none">
+                <div class="form-group">
+                  <label for="shopName">Shop Name</label>
+                  <input
+                    type="text"
+                    id="shopName"
+                    placeholder="Enter your shop name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="shopAddress">Shop Address</label>
+                  <input
+                    type="text"
+                    id="shopAddress"
+                    placeholder="Enter your shop address"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input
+                  type="password"
+                  id="registerPassword"
+                  placeholder="Create a password"
+                  required
+                />
+                <i
+                  class="fas fa-eye password-toggle"
+                  id="registerPasswordToggle"
+                ></i>
+              </div>
+
+              <div class="form-group">
+                <label for="registerConfirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  id="registerConfirmPassword"
+                  placeholder="Confirm your password"
+                  required
+                />
+                <i
+                  class="fas fa-eye password-toggle"
+                  id="confirmPasswordToggle"
+                ></i>
+              </div>
+
+              <button type="submit" class="btn">Create Account</button>
+
+              <div class="divider"><span>Or continue with</span></div>
+
+              <button type="button" class="btn btn-google">
+                <i class="fab fa-google"></i> Google
+              </button>
+
+              <div class="form-footer">
+                <p>
+                  Already have an account?
+                  <a href="#" id="goToLogin">Login now</a>
+                </p>
+              </div>
+            </form>
+
+            <!-- OTP Verification -->
+            <div class="otp-verification" id="otpVerification">
+              <h2 class="form-title">Verify Your Email</h2>
+              <p>
+                We've sent a 6-digit code to
+                <span id="emailSentTo">user@example.com</span>
+              </p>
+
+              <div class="otp-container">
+                <input
+                  type="text"
+                  class="otp-input"
+                  maxlength="1"
+                  pattern="[0-9]"
+                />
+                <input
+                  type="text"
+                  class="otp-input"
+                  maxlength="1"
+                  pattern="[0-9]"
+                />
+                <input
+                  type="text"
+                  class="otp-input"
+                  maxlength="1"
+                  pattern="[0-9]"
+                />
+                <input
+                  type="text"
+                  class="otp-input"
+                  maxlength="1"
+                  pattern="[0-9]"
+                />
+                <input
+                  type="text"
+                  class="otp-input"
+                  maxlength="1"
+                  pattern="[0-9]"
+                />
+                <input
+                  type="text"
+                  class="otp-input"
+                  maxlength="1"
+                  pattern="[0-9]"
+                />
+              </div>
+
+              <div class="timer">
+                Time remaining: <span id="countdown">03:00</span>
+              </div>
+
+              <button type="button" class="btn" id="verifyOtpBtn">
+                Verify
+              </button>
+
+              <p>
+                Didn't receive the code?
+                <button type="button" class="resend-btn" id="resendOtpBtn">
+                  Resend
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Add user type tracking variable at the top of the script
+      let currentUserType = "customer";
+
+      // Update user type selection for both login and registration
+      function setupUserTypeSelection(selector) {
+        const userTypes = document.querySelectorAll(`${selector} .user-type`);
+
+        userTypes.forEach((type) => {
+          type.addEventListener("click", function () {
+            userTypes.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+            currentUserType = this.getAttribute("data-type");
+
+            // Show/hide shopkeeper fields for registration form
+            if (selector === "#registerUserType") {
+              const shopkeeperFields =
+                document.querySelector(".shopkeeper-fields");
+              if (currentUserType === "shopkeeper") {
+                shopkeeperFields.style.display = "block";
+              } else {
+                shopkeeperFields.style.display = "none";
+              }
+            }
+          });
+        });
+      }
+
+      // Initialize both user type selectors
+      setupUserTypeSelection("#loginUserType");
+      setupUserTypeSelection("#registerUserType");
+
+      // Update form submission handlers
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Determine redirect based on user type
+          const redirectPage =
+            currentUserType === "customer" ? "main.html" : "shop.html";
+
+          // In a real application, you would validate credentials first
+          window.location.href = redirectPage;
+        });
+
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get user type and email
+          const userType = currentUserType;
+          const email = document.getElementById("registerEmail").value;
+
+          // Show OTP verification
+          document.getElementById("emailSentTo").textContent = email;
+          document
+            .querySelector(".auth-form.active")
+            .classList.remove("active");
+          document.getElementById("otpVerification").classList.add("active");
+
+          // Store user type for later redirection
+          document
+            .getElementById("otpVerification")
+            .setAttribute("data-user-type", userType);
+
+          // Start countdown timer
+          startCountdown();
+        });
+
+      // Update OTP verification handler
+      document
+        .getElementById("verifyOtpBtn")
+        .addEventListener("click", function () {
+          // In a real application, you would verify the OTP
+          const userType = document
+            .getElementById("otpVerification")
+            .getAttribute("data-user-type");
+          const redirectPage =
+            userType === "customer" ? "main.html" : "shop.html";
+
+          // Redirect to appropriate page
+          window.location.href = redirectPage;
+        });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tab switching functionality
+        const authTabs = document.querySelectorAll(".auth-tab");
+        const authForms = document.querySelectorAll(".auth-form");
+
+        authTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            const tabName = this.getAttribute("data-tab");
+
+            // Update active tab
+            authTabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            // Show corresponding form
+            authForms.forEach((form) => {
+              form.classList.remove("active");
+              if (form.id === `${tabName}Form`) {
+                form.classList.add("active");
+              }
+            });
+          });
+        });
+
+        // Navigate between login and register forms
+        document
+          .getElementById("goToRegister")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector('[data-tab="register"]').click();
+          });
+
+        document
+          .getElementById("goToLogin")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector('[data-tab="login"]').click();
+          });
+
+        // User type switching
+        const userTypes = document.querySelectorAll(".user-type");
+        const shopkeeperFields = document.querySelector(".shopkeeper-fields");
+
+        userTypes.forEach((type) => {
+          type.addEventListener("click", function () {
+            userTypes.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            if (this.getAttribute("data-type") === "shopkeeper") {
+              shopkeeperFields.style.display = "block";
+            } else {
+              shopkeeperFields.style.display = "none";
+            }
+          });
+        });
+
+        // Password visibility toggle
+        const passwordToggles = document.querySelectorAll(".password-toggle");
+
+        passwordToggles.forEach((toggle) => {
+          toggle.addEventListener("click", function () {
+            const inputId = this.id.replace("Toggle", "");
+            const passwordInput = document.getElementById(inputId);
+
+            if (passwordInput.type === "password") {
+              passwordInput.type = "text";
+              this.classList.remove("fa-eye");
+              this.classList.add("fa-eye-slash");
+            } else {
+              passwordInput.type = "password";
+              this.classList.remove("fa-eye-slash");
+              this.classList.add("fa-eye");
+            }
+          });
+        });
+
+        // Form submission
+        document
+          .getElementById("loginForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            // In a real application, you would validate and send data to server
+            alert("Login functionality would be implemented here!");
+          });
+
+        document
+          .getElementById("registerForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Get user type
+            const userType = document
+              .querySelector(".user-type.active")
+              .getAttribute("data-type");
+            const email = document.getElementById("registerEmail").value;
+
+            // Show OTP verification
+            document.getElementById("emailSentTo").textContent = email;
+            document
+              .querySelector(".auth-form.active")
+              .classList.remove("active");
+            document.getElementById("otpVerification").classList.add("active");
+
+            // Start countdown timer
+            startCountdown();
+          });
+
+        // OTP input handling
+        const otpInputs = document.querySelectorAll(".otp-input");
+
+        otpInputs.forEach((input, index) => {
+          input.addEventListener("input", function () {
+            if (this.value.length === 1) {
+              if (index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+              }
+            }
+          });
+
+          input.addEventListener("keydown", function (e) {
+            if (e.key === "Backspace" && this.value === "") {
+              if (index > 0) {
+                otpInputs[index - 1].focus();
+              }
+            }
+          });
+        });
+
+        // Verify OTP button
+        document
+          .getElementById("verifyOtpBtn")
+          .addEventListener("click", function () {
+            // In a real application, you would verify the OTP
+            alert("OTP verification would be implemented here!");
+          });
+
+        // Countdown timer function
+        function startCountdown() {
+          const countdownElement = document.getElementById("countdown");
+          const resendButton = document.getElementById("resendOtpBtn");
+          let timeLeft = 180; // 3 minutes in seconds
+
+          resendButton.classList.remove("active");
+
+          const countdownInterval = setInterval(function () {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+
+            countdownElement.textContent = `${minutes
+              .toString()
+              .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+            if (timeLeft <= 0) {
+              clearInterval(countdownInterval);
+              resendButton.classList.add("active");
+            } else {
+              timeLeft--;
+            }
+          }, 1000);
+        }
+
+        // Resend OTP button
+        document
+          .getElementById("resendOtpBtn")
+          .addEventListener("click", function () {
+            if (this.classList.contains("active")) {
+              // In a real application, you would resend the OTP
+              startCountdown();
+              alert("New OTP has been sent to your email!");
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
