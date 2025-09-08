@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solrrbox - Solar Made Simple</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #38b6ff;
+        --primary-dark: #0096e0;
+        --primary-light: #74d0ff;
+        --secondary: #f8f9fa;
+        --accent: #ff7e30;
+        --text-dark: #2d3748;
+        --text-light: #718096;
+        --gray-light: #e2e8f0;
+        --white: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        --transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        color: var(--text-dark);
+        line-height: 1.6;
+        background-color: var(--secondary);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 15px 0;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        transition: var(--transition);
+      }
+
+      .logo:hover {
+        transform: translateY(-2px);
+      }
+
+      .logo img {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .logo h1 {
+        color: var(--primary);
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .logo span {
+        color: var(--text-dark);
+        font-weight: 300;
+      }
+
+      .search-bar {
+        flex: 0 1 400px;
+        margin: 0 30px;
+        position: relative;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 12px 20px;
+        border: 2px solid var(--gray-light);
+        border-radius: 50px;
+        font-size: 16px;
+        transition: var(--transition);
+        padding-right: 50px;
+      }
+
+      .search-bar input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.2);
+      }
+
+      .search-bar button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .search-bar button:hover {
+        background-color: var(--primary-dark);
+        transform: rotate(10deg);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        align-items: center;
+      }
+
+      nav ul li {
+        margin-left: 25px;
+        position: relative;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: var(--transition);
+        padding: 5px 0;
+        position: relative;
+      }
+
+      nav ul li a:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--primary);
+        transition: var(--transition);
+      }
+
+      nav ul li a:hover {
+        color: var(--primary);
+      }
+
+      nav ul li a:hover:after {
+        width: 100%;
+      }
+
+      .login-btn {
+        background-color: var(--primary);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        border: 2px solid transparent;
+      }
+
+      .login-btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(56, 182, 255, 0.3);
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("https://static.vecteezy.com/system/resources/previews/001/235/998/non_2x/solar-panel-cell-on-dramatic-sunset-sky-background-free-photo.jpg");
+        background-size: cover;
+        background-position: center;
+        color: var(--white);
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+        background-size: 100% 100%;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero h2 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        animation: fadeInUp 1s ease 0.2s;
+        animation-fill-mode: both;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--white);
+        color: var(--primary);
+        padding: 14px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        border: 2px solid transparent;
+        animation: fadeInUp 1s ease 0.4s;
+        animation-fill-mode: both;
+      }
+
+      .btn:hover {
+        background-color: transparent;
+        color: var(--white);
+        border-color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-accent {
+        background-color: var(--accent);
+        color: var(--white);
+        margin-left: 15px;
+      }
+
+      .btn-accent:hover {
+        background-color: transparent;
+        color: var(--white);
+        border-color: var(--accent);
+      }
+
+      /* Keyword Trial Feature */
+      .keyword-trial {
+        background-color: var(--white);
+        padding: 80px 0;
+        text-align: center;
+      }
+
+      .keyword-trial h3 {
+        color: var(--primary);
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .keyword-trial h3:after {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 3px;
+        background: var(--primary);
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .keyword-input {
+        display: flex;
+        max-width: 600px;
+        margin: 30px auto;
+        position: relative;
+      }
+
+      .keyword-input input {
+        flex: 1;
+        padding: 16px 25px;
+        border: 2px solid var(--gray-light);
+        border-radius: 50px;
+        font-size: 16px;
+        transition: var(--transition);
+      }
+
+      .keyword-input input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.2);
+      }
+
+      .keyword-input button {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 0 30px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-left: 10px;
+        font-weight: 600;
+      }
+
+      .keyword-input button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(56, 182, 255, 0.3);
+      }
+
+      .results {
+        margin-top: 40px;
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .results.active {
+        display: block;
+      }
+
+      .result-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .result-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        padding: 25px;
+        text-align: left;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        border-left: 4px solid var(--primary);
+        cursor: pointer;
+        position: relative;
+      }
+
+      .result-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .login-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        opacity: 0;
+        transition: var(--transition);
+      }
+
+      .result-card:hover .login-overlay {
+        opacity: 1;
+      }
+
+      .login-prompt {
+        color: white;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .login-prompt-btn {
+        background-color: var(--primary);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      .login-prompt-btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      /* Services Section */
+      .services {
+        padding: 80px 0;
+        background-color: var(--secondary);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+        color: var(--text-dark);
+        position: relative;
+      }
+
+      .section-title:after {
+        content: "";
+        position: absolute;
+        width: 70px;
+        height: 4px;
+        background: var(--primary);
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .service-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+        cursor: pointer;
+      }
+
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+        background: linear-gradient(
+          45deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: white;
+        font-size: 2.5rem;
+        padding: 30px;
+        text-align: center;
+        transition: var(--transition);
+      }
+
+      .service-card:hover .service-icon {
+        background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+      }
+
+      .service-content {
+        padding: 25px;
+      }
+
+      .service-content h3 {
+        margin-bottom: 15px;
+        color: var(--primary);
+        transition: var(--transition);
+      }
+
+      .service-card:hover .service-content h3 {
+        color: var(--primary-dark);
+      }
+
+      /* Products Section */
+      .products {
+        padding: 80px 0;
+        background-color: var(--white);
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .product-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+        cursor: pointer;
+      }
+
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-img {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 3rem;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .product-card:hover .product-img {
+        color: var(--white);
+      }
+
+      .product-img::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          rgba(56, 182, 255, 0.8),
+          rgba(56, 182, 255, 0.4)
+        );
+        opacity: 0;
+        transition: var(--transition);
+      }
+
+      .product-card:hover .product-img::before {
+        opacity: 1;
+      }
+
+      .product-content {
+        padding: 25px;
+      }
+
+      .product-content h3 {
+        margin-bottom: 15px;
+        color: var(--primary);
+        transition: var(--transition);
+      }
+
+      .product-card:hover .product-content h3 {
+        color: var(--primary-dark);
+      }
+
+      .product-price {
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin-top: 10px;
+      }
+
+      /* About Section */
+      .about {
+        padding: 80px 0;
+        background: linear-gradient(
+          to bottom,
+          var(--white) 0%,
+          var(--secondary) 100%
+        );
+      }
+
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .about-content p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 80px 0;
+        background-color: var(--secondary);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 50px;
+      }
+
+      .contact-info h3,
+      .contact-form h3 {
+        color: var(--primary);
+        margin-bottom: 25px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .contact-info h3:after,
+      .contact-form h3:after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 3px;
+        background: var(--primary);
+        bottom: -10px;
+        left: 0;
+      }
+
+      .contact-details {
+        margin-top: 30px;
+      }
+
+      .contact-details p {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        transition: var(--transition);
+      }
+
+      .contact-details p:hover {
+        transform: translateX(5px);
+      }
+
+      .contact-details i {
+        margin-right: 15px;
+        color: var(--primary);
+        width: 20px;
+        transition: var(--transition);
+      }
+
+      .contact-details p:hover i {
+        color: var(--primary-dark);
+        transform: scale(1.2);
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 16px 20px;
+        border: 2px solid var(--gray-light);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.2);
+      }
+
+      .form-group textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 16px 40px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-btn:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: var(--transition);
+      }
+
+      .submit-btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(56, 182, 255, 0.3);
+      }
+
+      .submit-btn:hover:before {
+        left: 100%;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--text-dark);
+        color: var(--white);
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h4 {
+        color: var(--primary);
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h4:after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 2px;
+        background: var(--primary);
+        bottom: 0;
+        left: 0;
+      }
+
+      .footer-column p,
+      .footer-column a {
+        color: var(--gray-light);
+        margin-bottom: 15px;
+        display: block;
+        transition: var(--transition);
+        text-decoration: none;
+      }
+
+      .footer-column a:hover {
+        color: var(--primary);
+        transform: translateX(5px);
+      }
+
+      .social-icons {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .social-icons a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        margin-right: 10px;
+        transition: var(--transition);
+      }
+
+      .social-icons a:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .map-container {
+        height: 200px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 15px;
+      }
+
+      .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--gray-light);
+        font-size: 0.9rem;
+      }
+
+      /* Login Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1001;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background-color: var(--white);
+        padding: 40px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-light);
+        transition: var(--transition);
+      }
+
+      .close-modal:hover {
+        color: var(--primary);
+      }
+
+      .modal h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--primary);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .header-content {
+          flex-direction: column;
+        }
+
+        .search-bar {
+          flex: 0 0 100%;
+          width: 100%;
+          margin: 20px 0;
+          order: 3;
+        }
+
+        nav {
+          margin-top: 20px;
+        }
+
+        .hero h2 {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        nav ul li {
+          margin: 5px 10px;
+        }
+
+        .hero h2 {
+          font-size: 2rem;
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .footer-column h4:after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .social-icons {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <img src="images/Solrrbox.jpg" alt="Solrrbox Logo" />
+            <h1>Solrr<span>box</span></h1>
+          </div>
+
+          <div class="search-bar">
+            <input
+              type="text"
+              placeholder="Search for solar products or services..."
+            />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+
+          <nav>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="login.html" class="login-btn">Login</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h2>Solar Made Simple</h2>
+          <p>
+            We connect users, product sellers, and service providers in the
+            solar industry — all on one easy-to-use platform.
+          </p>
+          <div>
+            <a href="#contact" class="btn">Get Started</a>
+            <a href="#services" class="btn btn-accent">Our Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keyword Trial Feature -->
+    <section class="keyword-trial">
+      <div class="container">
+        <h3>Find What You Need</h3>
+        <p>
+          Enter keywords related to solar products or services you're looking
+          for
+        </p>
+        <div class="keyword-input">
+          <input
+            type="text"
+            id="keywordInput"
+            placeholder="e.g., solar panels, installation, maintenance..."
+          />
+          <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+        </div>
+        <div class="results" id="keywordResults">
+          <h4>Search Results for "<span id="searchTerm"></span>"</h4>
+          <div class="result-grid">
+            <div class="result-card">
+              <h5>Solar Panel Installation</h5>
+              <p>
+                Professional installation services for residential and
+                commercial properties.
+              </p>
+              <div class="login-overlay">
+                <div class="login-prompt">
+                  <p>Login to view details</p>
+                  <a href="login.html" class="login-prompt-btn">Login Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="result-card">
+              <h5>Solar Inverters</h5>
+              <p>
+                High-efficiency inverters from leading brands with warranty.
+              </p>
+              <div class="login-overlay">
+                <div class="login-prompt">
+                  <p>Login to view details</p>
+                  <a href="login.html" class="login-prompt-btn">Login Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="result-card">
+              <h5>Solar Panel Cleaning</h5>
+              <p>
+                Professional cleaning services to maintain panel efficiency.
+              </p>
+              <div class="login-overlay">
+                <div class="login-prompt">
+                  <p>Login to view details</p>
+                  <a href="login.html" class="login-prompt-btn">Login Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div
+              class="service-icon"
+              style="background: linear-gradient(45deg, #38b6ff, #74d0ff)"
+            >
+              <i class="fas fa-broom"></i>
+            </div>
+            <div class="service-content">
+              <h3>Cleaning</h3>
+              <p>
+                Professional solar panel cleaning services to maximize
+                efficiency and longevity of your system.
+              </p>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to book this service</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div
+              class="service-icon"
+              style="background: linear-gradient(45deg, #38b6ff, #74d0ff)"
+            >
+              <i class="fas fa-search"></i>
+            </div>
+            <div class="service-content">
+              <h3>Fault Detection</h3>
+              <p>
+                Advanced diagnostic services to identify and resolve issues with
+                your solar system.
+              </p>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to book this service</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div
+              class="service-icon"
+              style="background: linear-gradient(45deg, #38b6ff, #74d0ff)"
+            >
+              <i class="fas fa-tools"></i>
+            </div>
+            <div class="service-content">
+              <h3>AMC</h3>
+              <p>
+                Annual Maintenance Contracts to keep your solar system running
+                smoothly year-round.
+              </p>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to book this service</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div
+              class="service-icon"
+              style="background: linear-gradient(45deg, #38b6ff, #74d0ff)"
+            >
+              <i class="fas fa-solar-panel"></i>
+            </div>
+            <div class="service-content">
+              <h3>Installation</h3>
+              <p>
+                Expert installation services for residential and commercial
+                solar systems.
+              </p>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to book this service</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+      <div class="container">
+        <h2 class="section-title">Our Products</h2>
+        <div class="products-grid">
+          <div class="product-card">
+            <div
+              class="product-img"
+              style="
+                background-image: url('https://media.wired.com/photos/66f6d9e8edd5b22be7017791/1:1/w_2897,h_2897,c_limit/GettyImages-1681913304.jpg');
+              "
+            >
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div class="product-content">
+              <h3>Inverter</h3>
+              <p>
+                High-efficiency solar inverters from top brands with extended
+                warranties.
+              </p>
+              <div class="product-price">₹24,999</div>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to purchase this product</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div
+              class="product-img"
+              style="
+                background-image: url('https://media.assettype.com/outlookbusiness/2024-10-14/vgj060ya/house-with-large-solar-panel-roof1270664-27345.jpg?w=640');
+              "
+            >
+              <i class="fas fa-solar-panel"></i>
+            </div>
+            <div class="product-content">
+              <h3>Solar Panels</h3>
+              <p>
+                Premium quality solar panels with high energy conversion
+                efficiency.
+              </p>
+              <div class="product-price">₹18,499</div>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to purchase this product</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div
+              class="product-img"
+              style="
+                background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3yE5bvUxZFNgwF2EA6FB6nGzpohnSs2jKfQ&s');
+              "
+            >
+              <i class="fas fa-border-all"></i>
+            </div>
+            <div class="product-content">
+              <h3>Frame</h3>
+              <p>
+                Durable and corrosion-resistant frames for all types of solar
+                installations.
+              </p>
+              <div class="product-price">₹8,999</div>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to purchase this product</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div
+              class="product-img"
+              style="
+                background-image: url('https://content.jdmagicbox.com/comp/palakkad/e4/9999px491.x491.200613095940.j4e4/catalogue/bayment-solar-power-systems-pattambi-palakkad-battery-dealers-aqa2cyqk31.jpg');
+              "
+            >
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <div class="product-content">
+              <h3>Net Meter</h3>
+              <p>
+                Advanced net meters to track your energy production and
+                consumption.
+              </p>
+              <div class="product-price">₹12,499</div>
+            </div>
+            <div class="login-overlay">
+              <div class="login-prompt">
+                <p>Login to purchase this product</p>
+                <a href="login.html" class="login-prompt-btn">Login Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="section-title">About Solrrbox</h2>
+        <div class="about-content">
+          <p>
+            Solrrbox makes solar simple for everyone. We connect users, product
+            sellers, and service providers in the solar industry — all on one
+            easy-to-use platform.
+          </p>
+          <p>
+            Find everything you need, from panels to installation services,
+            without worrying about technical details. Browse, compare, and
+            access trusted solar products and services effortlessly.
+          </p>
+          <p>
+            Take the first step toward a sustainable, solar-powered future — and
+            do it the easy way.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>
+              Reach out to us for any queries or assistance with your solar
+              needs.
+            </p>
+            <div class="contact-details">
+              <p>
+                <i class="fas fa-phone"></i> +91 97918 05322 / +91 83449 34401
+              </p>
+              <p><i class="fas fa-envelope"></i> info@solrrbox.com</p>
+              <p>
+                <i class="fas fa-map-marker-alt"></i> 106, Brahmanar Street,
+                Kangeyanallur, Vellore, Tamil Nadu
+              </p>
+            </div>
+          </div>
+          <div class="contact-form">
+            <h3>Send us a Message</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" required />
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" required />
+              </div>
+              <div class="form-group">
+                <label for="queries">Queries</label>
+                <textarea id="queries" required></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h4>About Us</h4>
+            <p>
+              Solrrbox makes solar simple for everyone. We connect users,
+              product sellers, and service providers in the solar industry.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/solrrbox?igsh=YzN1ZXhzc3FyaXhl"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://www.linkedin.com/company/solrrbox/"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#products">Products</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+            <a href="login.html">Login</a>
+          </div>
+          <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-phone"></i> +91 97918 05322</p>
+            <p><i class="fas fa-phone"></i> +91 83449 34401</p>
+            <p><i class="fas fa-envelope"></i> info@solrrbox.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Vellore, Tamil Nadu</p>
+          </div>
+          <div class="footer-column">
+            <h4>Our Location</h4>
+            <div class="map-container">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0409982844617!2d79.15335867454658!3d12.9692284149313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad479f0ccbe067%3A0xfef222e5f36ecdeb!2sVellore%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1757344154976!5m2!1sen!2sin"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2023 Solrrbox. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>Login to Your Account</h3>
+        <form>
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px">
+          Don't have an account? <a href="register.html">Register here</a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Keyword Search Functionality
+      document
+        .getElementById("searchBtn")
+        .addEventListener("click", function () {
+          const keyword = document.getElementById("keywordInput").value.trim();
+          if (keyword) {
+            document.getElementById("searchTerm").textContent = keyword;
+            document.getElementById("keywordResults").classList.add("active");
+
+            // Scroll to results
+            document
+              .getElementById("keywordResults")
+              .scrollIntoView({ behavior: "smooth" });
+          }
+        });
+
+      // Contact Form Submission
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get form values
+          const name = document.getElementById("name").value;
+          const phone = document.getElementById("phone").value;
+          const email = document.getElementById("email").value;
+          const location = document.getElementById("location").value;
+          const queries = document.getElementById("queries").value;
+
+          // In a real application, you would send this data to a server
+          console.log("Form submitted:", {
+            name,
+            phone,
+            email,
+            location,
+            queries,
+          });
+
+          // Show success message
+          alert("Thank you for contacting us! We will get back to you soon.");
+
+          // Reset form
+          document.getElementById("contactForm").reset();
+        });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll("nav a, .btn").forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          if (this.getAttribute("href").startsWith("#")) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+          // Allow normal navigation for external links
+        });
+      });
+
+      // Header scroll effect
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        if (window.scrollY > 50) {
+          header.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.1)";
+          header.style.padding = "10px 0";
+        } else {
+          header.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.05)";
+          header.style.padding = "15px 0";
+        }
+      });
+
+      // Login prompt for product/service cards
+      document
+        .querySelectorAll(".service-card, .product-card, .result-card")
+        .forEach((card) => {
+          card.addEventListener("click", function () {
+            window.location.href = "login.html";
+          });
+        });
+
+      // Modal functionality
+      const modal = document.getElementById("loginModal");
+      const closeModal = document.querySelector(".close-modal");
+
+      closeModal.addEventListener("click", function () {
+        modal.style.display = "none";
+      });
+
+      window.addEventListener("click", function (e) {
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
