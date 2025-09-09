@@ -646,7 +646,7 @@
             <form class="auth-form" id="registerForm">
               <h2 class="form-title">Create an Account</h2>
 
-              <div class="user-type-selector">
+              <div class="user-type-selector" id="registerUserType">
                 <div class="user-type active" data-type="customer">
                   Customer
                 </div>
@@ -843,64 +843,49 @@
         });
       }
 
-      // Initialize both user type selectors
-      setupUserTypeSelection("#loginUserType");
-      setupUserTypeSelection("#registerUserType");
+      // OTP verification handler - UPDATED TO REDIRECT SHOPKEEPERS TO SETUP.HTML
+      function handleOtpVerification() {
+        // In a real application, you would verify the OTP
+        const userType = document
+          .getElementById("otpVerification")
+          .getAttribute("data-user-type");
+        const redirectPage =
+          userType === "customer" ? "main.html" : "setup.html";
 
-      // Update form submission handlers
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+        // Redirect to appropriate page
+        window.location.href = redirectPage;
+      }
 
-          // Determine redirect based on user type
-          const redirectPage =
-            currentUserType === "customer" ? "main.html" : "shop.html";
+      // Countdown timer function
+      function startCountdown() {
+        const countdownElement = document.getElementById("countdown");
+        const resendButton = document.getElementById("resendOtpBtn");
+        let timeLeft = 180; // 3 minutes in seconds
 
-          // In a real application, you would validate credentials first
-          window.location.href = redirectPage;
-        });
+        resendButton.classList.remove("active");
 
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+        const countdownInterval = setInterval(function () {
+          const minutes = Math.floor(timeLeft / 60);
+          const seconds = timeLeft % 60;
 
-          // Get user type and email
-          const userType = currentUserType;
-          const email = document.getElementById("registerEmail").value;
+          countdownElement.textContent = `${minutes
+            .toString()
+            .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
-          // Show OTP verification
-          document.getElementById("emailSentTo").textContent = email;
-          document
-            .querySelector(".auth-form.active")
-            .classList.remove("active");
-          document.getElementById("otpVerification").classList.add("active");
+          if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            resendButton.classList.add("active");
+          } else {
+            timeLeft--;
+          }
+        }, 1000);
+      }
 
-          // Store user type for later redirection
-          document
-            .getElementById("otpVerification")
-            .setAttribute("data-user-type", userType);
-
-          // Start countdown timer
-          startCountdown();
-        });
-
-      // Update OTP verification handler
-      document
-        .getElementById("verifyOtpBtn")
-        .addEventListener("click", function () {
-          // In a real application, you would verify the OTP
-          const userType = document
-            .getElementById("otpVerification")
-            .getAttribute("data-user-type");
-          const redirectPage =
-            userType === "customer" ? "main.html" : "shop.html";
-
-          // Redirect to appropriate page
-          window.location.href = redirectPage;
-        });
       document.addEventListener("DOMContentLoaded", function () {
+        // Initialize both user type selectors
+        setupUserTypeSelection("#loginUserType");
+        setupUserTypeSelection("#registerUserType");
+
         // Tab switching functionality
         const authTabs = document.querySelectorAll(".auth-tab");
         const authForms = document.querySelectorAll(".auth-form");
@@ -938,23 +923,6 @@
             document.querySelector('[data-tab="login"]').click();
           });
 
-        // User type switching
-        const userTypes = document.querySelectorAll(".user-type");
-        const shopkeeperFields = document.querySelector(".shopkeeper-fields");
-
-        userTypes.forEach((type) => {
-          type.addEventListener("click", function () {
-            userTypes.forEach((t) => t.classList.remove("active"));
-            this.classList.add("active");
-
-            if (this.getAttribute("data-type") === "shopkeeper") {
-              shopkeeperFields.style.display = "block";
-            } else {
-              shopkeeperFields.style.display = "none";
-            }
-          });
-        });
-
         // Password visibility toggle
         const passwordToggles = document.querySelectorAll(".password-toggle");
 
@@ -975,24 +943,28 @@
           });
         });
 
-        // Form submission
+        // Login form submission
         document
           .getElementById("loginForm")
           .addEventListener("submit", function (e) {
             e.preventDefault();
-            // In a real application, you would validate and send data to server
-            alert("Login functionality would be implemented here!");
+
+            // Determine redirect based on user type
+            const redirectPage =
+              currentUserType === "customer" ? "main.html" : "shop.html";
+
+            // In a real application, you would validate credentials first
+            window.location.href = redirectPage;
           });
 
+        // Register form submission
         document
           .getElementById("registerForm")
           .addEventListener("submit", function (e) {
             e.preventDefault();
 
-            // Get user type
-            const userType = document
-              .querySelector(".user-type.active")
-              .getAttribute("data-type");
+            // Get user type and email
+            const userType = currentUserType;
             const email = document.getElementById("registerEmail").value;
 
             // Show OTP verification
@@ -1001,6 +973,11 @@
               .querySelector(".auth-form.active")
               .classList.remove("active");
             document.getElementById("otpVerification").classList.add("active");
+
+            // Store user type for later redirection
+            document
+              .getElementById("otpVerification")
+              .setAttribute("data-user-type", userType);
 
             // Start countdown timer
             startCountdown();
@@ -1027,38 +1004,10 @@
           });
         });
 
-        // Verify OTP button
+        // Set up the OTP verification handler
         document
           .getElementById("verifyOtpBtn")
-          .addEventListener("click", function () {
-            // In a real application, you would verify the OTP
-            alert("OTP verification would be implemented here!");
-          });
-
-        // Countdown timer function
-        function startCountdown() {
-          const countdownElement = document.getElementById("countdown");
-          const resendButton = document.getElementById("resendOtpBtn");
-          let timeLeft = 180; // 3 minutes in seconds
-
-          resendButton.classList.remove("active");
-
-          const countdownInterval = setInterval(function () {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-
-            countdownElement.textContent = `${minutes
-              .toString()
-              .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
-            if (timeLeft <= 0) {
-              clearInterval(countdownInterval);
-              resendButton.classList.add("active");
-            } else {
-              timeLeft--;
-            }
-          }, 1000);
-        }
+          .addEventListener("click", handleOtpVerification);
 
         // Resend OTP button
         document
