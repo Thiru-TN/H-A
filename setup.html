@@ -38,6 +38,12 @@
         --radius: 12px;
         --border-light: 1px solid var(--gray-light);
 
+        /* Consistent form input sizing */
+        --form-input-height: 42px;
+        --form-input-padding: 10px 12px;
+        --form-input-font-size: 14px;
+        --form-textarea-min-height: 80px;
+
         /* Base font sizes for different devices */
         --base-font-size-mobile: 14px;
         --base-font-size-tablet: 15px;
@@ -273,7 +279,7 @@
         margin-bottom: 8px;
         font-weight: 600;
         color: var(--text-dark);
-        font-size: 0.95rem;
+        font-size: var(--form-input-font-size);
       }
 
       .form-group .required::after {
@@ -282,16 +288,33 @@
         margin-left: 4px;
       }
 
+      /* Consistent form input styling */
       .form-group input,
       .form-group select,
       .form-group textarea {
         width: 100%;
-        padding: 12px;
+        padding: var(--form-input-padding);
         border: 2px solid var(--gray-light);
         border-radius: 8px;
-        font-size: 1rem;
+        font-size: var(--form-input-font-size);
         transition: var(--transition);
         font-family: "Open Sans", sans-serif;
+        line-height: 1.4;
+      }
+
+      .form-group input,
+      .form-group select {
+        height: var(--form-input-height);
+      }
+
+      .form-group textarea {
+        height: 30px;
+        resize: none; /* Disable resizing */
+        padding-top: 10px;
+        padding-bottom: 10px;
+        /* Ensure consistent font properties */
+        font-size: var(--form-input-font-size) !important;
+        line-height: 1.4 !important;
       }
 
       .form-group input:focus,
@@ -300,11 +323,6 @@
         outline: none;
         border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.2);
-      }
-
-      .form-group textarea {
-        min-height: 120px;
-        resize: vertical;
       }
 
       /* Document Requirements */
@@ -502,7 +520,7 @@
       }
 
       .detail-item p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
 
       /* Business Type Cards */
@@ -646,7 +664,7 @@
         }
 
         .step-label {
-          font-size: 0.95rem;
+          font-size: 0.9rem;
         }
 
         .business-type-card {
@@ -882,15 +900,18 @@
 
             <div class="form-group">
               <label for="address" class="required">Business Address</label>
-              <textarea id="address">
-123 Solar Avenue, Green City, Tamil Nadu 632001</textarea
-              >
+              <textarea
+                id="address"
+                readonly
+                placeholder="123 Solar Avenue, Green City, Tamil Nadu 632001"
+              ></textarea>
             </div>
 
             <div class="form-group">
               <label for="aboutUs" class="required">About Us</label>
               <textarea
                 id="aboutUs"
+                readonly
                 placeholder="Describe your company and services..."
               ></textarea>
             </div>
