@@ -523,6 +523,181 @@
         font-size: 0.9rem;
       }
 
+      /* Documents Preview Section */
+      .documents-preview {
+        background-color: var(--white);
+        border-radius: var(--radius);
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .documents-preview h4 {
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        font-size: 1.2rem;
+      }
+
+      .uploaded-documents {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .uploaded-document {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background-color: var(--secondary);
+        border-radius: 8px;
+        border: 1px solid var(--gray-light);
+      }
+
+      .document-preview-icon {
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-right: 15px;
+        min-width: 30px;
+      }
+
+      .document-details {
+        flex: 1;
+      }
+
+      .document-name {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 5px;
+      }
+
+      .document-type {
+        color: var(--text-light);
+        font-size: 0.85rem;
+      }
+
+      .document-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn-small {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .btn-view {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-view:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .preview-thumbnail {
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+        object-fit: cover;
+        margin-left: 15px;
+        border: 1px solid var(--gray-light);
+      }
+
+      .no-documents {
+        text-align: center;
+        color: var(--text-light);
+        font-style: italic;
+        padding: 20px;
+      }
+
+      /* Modal for document preview */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 2000;
+      }
+
+      .modal-content {
+        position: relative;
+        background-color: var(--white);
+        margin: 2% auto;
+        padding: 0;
+        width: 90%;
+        max-width: 800px;
+        max-height: 90vh;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .modal-header {
+        padding: 20px;
+        border-bottom: var(--border-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      .close {
+        color: var(--text-light);
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      .close:hover {
+        color: var(--text-dark);
+      }
+
+      .modal-body {
+        padding: 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+
+      .document-preview-content {
+        text-align: center;
+      }
+
+      .document-preview-content img {
+        max-width: 100%;
+        max-height: 60vh;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .pdf-preview {
+        background-color: var(--gray-light);
+        padding: 40px;
+        border-radius: 8px;
+        color: var(--text-light);
+      }
+
+      .pdf-preview i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+
       /* Business Type Cards */
       .business-type-cards {
         display: flex;
@@ -632,6 +807,12 @@
           flex: 1 1 calc(50% - 20px);
           min-width: calc(50% - 20px);
         }
+
+        .uploaded-documents {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 15px;
+        }
       }
 
       /* Responsive Design for Desktop */
@@ -690,6 +871,10 @@
         .form-group.full-width {
           flex: 1 1 100%;
         }
+
+        .uploaded-documents {
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
       }
 
       /* Mobile-specific adjustments */
@@ -744,6 +929,25 @@
 
         .form-navigation .btn {
           width: 100%;
+        }
+
+        .uploaded-document {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .document-preview-icon {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+
+        .document-actions {
+          justify-content: center;
+          margin-top: 10px;
+        }
+
+        .preview-thumbnail {
+          margin: 15px auto 0 auto;
         }
       }
 
@@ -1051,6 +1255,14 @@
             </div>
           </div>
 
+          <!-- Documents Preview Section -->
+          <div class="documents-preview">
+            <h4>Uploaded Documents</h4>
+            <div class="uploaded-documents" id="uploaded-documents-list">
+              <div class="no-documents">No documents uploaded yet</div>
+            </div>
+          </div>
+
           <div class="form-navigation">
             <button class="btn btn-secondary" id="back-to-documents">
               Back
@@ -1090,6 +1302,21 @@
       </div>
     </main>
 
+    <!-- Modal for Document Preview -->
+    <div id="documentModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title" id="modalTitle">Document Preview</span>
+          <button class="close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="document-preview-content" id="documentPreviewContent">
+            <!-- Document content will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Business type selection
@@ -1097,6 +1324,7 @@
           ".business-type-card"
         );
         let selectedBusinessType = "";
+        let uploadedDocuments = []; // Store uploaded documents
 
         businessTypeCards.forEach((card) => {
           card.addEventListener("click", function () {
@@ -1133,13 +1361,19 @@
         const step3 = document.getElementById("step3");
         const step4 = document.getElementById("step4");
 
+        // Modal elements
+        const modal = document.getElementById("documentModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalContent = document.getElementById("documentPreviewContent");
+        const closeModal = document.getElementById("closeModal");
+
         // Document requirements by business type
         const documentRequirements = {
           manufacturer: [
             "PAN Card (Company/LLP/Proprietor)",
             "GST Registration Certificate",
             "Bank Account Proof (Cancelled cheque / passbook)",
-            "Authorized Signatory’s ID & Address Proof (Aadhaar, Passport, etc.)",
+            "Authorized Signatory's ID & Address Proof (Aadhaar, Passport, etc.)",
             "Certificate of Incorporation / Udyam/MSME Registration (if applicable)",
             "BIS Certification (for solar PV modules/components)",
             "MNRE Approval / Empanelment (if manufacturing for government projects)",
@@ -1148,7 +1382,7 @@
             "PAN Card",
             "GST Registration Certificate",
             "Bank Account Proof",
-            "Authorized Signatory’s ID & Address Proof",
+            "Authorized Signatory's ID & Address Proof",
             "Past Work Orders / Project References (recommended for credibility)",
             "MSME / Udyam Registration (optional)",
             "MNRE Empanelment Certificate",
@@ -1157,7 +1391,7 @@
             "PAN Card",
             "GST Registration Certificate",
             "Bank Account Proof",
-            "Authorized Signatory’s ID & Address Proof",
+            "Authorized Signatory's ID & Address Proof",
             "Authorized Dealer / Distributor Certificate (from manufacturer/brand)",
             "Udyam/MSME Registration (optional)",
           ],
@@ -1165,7 +1399,7 @@
             "PAN Card",
             "GST Registration Certificate",
             "Bank Account Proof",
-            "Authorized Signatory’s ID & Address Proof",
+            "Authorized Signatory's ID & Address Proof",
             "Purchase Invoice / Proof of Sourcing (to confirm authenticity of products sold)",
             "Brand Authorization Letter (if selling branded products)",
           ],
@@ -1173,15 +1407,14 @@
             "PAN Card",
             "GST Registration Certificate",
             "Bank Account Proof",
-            "Authorized Signatory’s ID & Address Proof",
+            "Authorized Signatory's ID & Address Proof",
             "Service Contracts / AMC Agreements (optional but good for validation)",
             "Udyam/MSME Registration (optional)",
           ],
         };
 
         // File upload functionality
-        const fileUploads = document.querySelectorAll(".file-upload");
-        fileUploads.forEach((upload) => {
+        function setupFileUpload(upload) {
           const fileInput = upload.querySelector(".file-input");
 
           upload.addEventListener("click", function () {
@@ -1190,11 +1423,164 @@
 
           fileInput.addEventListener("change", function () {
             if (this.files && this.files[0]) {
-              const fileName = this.files[0].name;
+              const file = this.files[0];
+              const fileName = file.name;
               upload.querySelector("h4").textContent = fileName;
               upload.querySelector("p").textContent = "Click to change";
+
+              // Store document info for review section
+              const documentName =
+                upload
+                  .closest(".document-item")
+                  ?.querySelector(".document-info h4")?.textContent ||
+                "Unknown Document";
+
+              // Check if document already exists and update it, otherwise add new
+              const existingIndex = uploadedDocuments.findIndex(
+                (doc) => doc.name === documentName
+              );
+              const documentData = {
+                name: documentName,
+                fileName: fileName,
+                file: file,
+                type: file.type,
+                size: file.size,
+              };
+
+              if (existingIndex !== -1) {
+                uploadedDocuments[existingIndex] = documentData;
+              } else {
+                uploadedDocuments.push(documentData);
+              }
             }
           });
+        }
+
+        // Initial file upload setup
+        const fileUploads = document.querySelectorAll(".file-upload");
+        fileUploads.forEach(setupFileUpload);
+
+        // Function to update documents preview
+        function updateDocumentsPreview() {
+          const documentsListContainer = document.getElementById(
+            "uploaded-documents-list"
+          );
+
+          if (uploadedDocuments.length === 0) {
+            documentsListContainer.innerHTML =
+              '<div class="no-documents">No documents uploaded yet</div>';
+            return;
+          }
+
+          documentsListContainer.innerHTML = "";
+
+          uploadedDocuments.forEach((doc, index) => {
+            const documentElement = document.createElement("div");
+            documentElement.className = "uploaded-document";
+
+            const isImage = doc.type.startsWith("image/");
+            const isPDF = doc.type === "application/pdf";
+
+            let iconClass = "fas fa-file";
+            if (isImage) iconClass = "fas fa-file-image";
+            else if (isPDF) iconClass = "fas fa-file-pdf";
+
+            documentElement.innerHTML = `
+              <div class="document-preview-icon">
+                <i class="${iconClass}"></i>
+              </div>
+              <div class="document-details">
+                <div class="document-name">${doc.name}</div>
+                <div class="document-type">${doc.fileName} • ${(
+              doc.size /
+              1024 /
+              1024
+            ).toFixed(2)} MB</div>
+              </div>
+              <div class="document-actions">
+                <button class="btn btn-view btn-small" onclick="previewDocument(${index})">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </div>
+              ${
+                isImage
+                  ? `<img class="preview-thumbnail" src="${URL.createObjectURL(
+                      doc.file
+                    )}" alt="Thumbnail">`
+                  : ""
+              }
+            `;
+
+            documentsListContainer.appendChild(documentElement);
+          });
+        }
+
+        // Function to preview document
+        window.previewDocument = function (index) {
+          const doc = uploadedDocuments[index];
+          if (!doc) return;
+
+          modalTitle.textContent = doc.name;
+          modalContent.innerHTML = "";
+
+          if (doc.type.startsWith("image/")) {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(doc.file);
+            img.alt = doc.name;
+            modalContent.appendChild(img);
+          } else if (doc.type === "application/pdf") {
+            modalContent.innerHTML = `
+              <div class="pdf-preview">
+                <i class="fas fa-file-pdf"></i>
+                <h4>${doc.fileName}</h4>
+                <p>PDF files cannot be previewed directly in this interface.</p>
+                <p>File size: ${(doc.size / 1024 / 1024).toFixed(2)} MB</p>
+                <button class="btn" onclick="downloadDocument(${index})">
+                  <i class="fas fa-download"></i> Download to View
+                </button>
+              </div>
+            `;
+          } else {
+            modalContent.innerHTML = `
+              <div class="pdf-preview">
+                <i class="fas fa-file"></i>
+                <h4>${doc.fileName}</h4>
+                <p>This file type cannot be previewed directly.</p>
+                <p>File size: ${(doc.size / 1024 / 1024).toFixed(2)} MB</p>
+                <button class="btn" onclick="downloadDocument(${index})">
+                  <i class="fas fa-download"></i> Download to View
+                </button>
+              </div>
+            `;
+          }
+
+          modal.style.display = "block";
+        };
+
+        // Function to download document
+        window.downloadDocument = function (index) {
+          const doc = uploadedDocuments[index];
+          if (!doc) return;
+
+          const url = URL.createObjectURL(doc.file);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = doc.fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        };
+
+        // Modal close functionality
+        closeModal.addEventListener("click", function () {
+          modal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+          }
         });
 
         // Navigation functions
@@ -1278,24 +1664,12 @@
                         </div>
                     `;
 
-            // Add file upload functionality to the new upload area
-            const uploadArea = docItem.querySelector(".file-upload");
-            const fileInput = docItem.querySelector(".file-input");
-
-            uploadArea.addEventListener("click", function () {
-              fileInput.click();
-            });
-
-            fileInput.addEventListener("change", function () {
-              if (this.files && this.files[0]) {
-                const fileName = this.files[0].name;
-                uploadArea.querySelector("h4").textContent = fileName;
-                uploadArea.querySelector("p").textContent = "Click to change";
-              }
-            });
-
             docsContainer.appendChild(docItem);
           });
+
+          // Setup file uploads for new document items
+          const newFileUploads = docsContainer.querySelectorAll(".file-upload");
+          newFileUploads.forEach(setupFileUpload);
         });
 
         backToDetailsBtn.addEventListener("click", function () {
@@ -1309,16 +1683,7 @@
 
         nextToReviewBtn.addEventListener("click", function () {
           // Check if at least one document is uploaded
-          const docUploads = documentsSection.querySelectorAll(".file-input");
-          let atLeastOneUploaded = false;
-
-          docUploads.forEach((upload) => {
-            if (upload.files && upload.files[0]) {
-              atLeastOneUploaded = true;
-            }
-          });
-
-          if (!atLeastOneUploaded) {
+          if (uploadedDocuments.length === 0) {
             alert("Please upload at least one document to continue.");
             return;
           }
@@ -1347,6 +1712,9 @@
             document.getElementById("shopTimings").value || "Not specified";
           document.getElementById("preview-about").textContent =
             document.getElementById("aboutUs").value || "Not provided";
+
+          // Update documents preview
+          updateDocumentsPreview();
         });
 
         backToDocumentsBtn.addEventListener("click", function () {
